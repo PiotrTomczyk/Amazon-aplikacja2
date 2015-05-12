@@ -1,0 +1,15 @@
+{
+  "name": "aws-sqs-console",
+  "version": "0.1.0",
+  "description": "amazon sqs simple console",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Radek Adamus <adamusr@gmail.com> (https://github.com/radamus/)",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.0.0-rc13",
+    "async": "~0.7.0"
+  }
+}

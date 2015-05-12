@@ -1,0 +1,8 @@
+{	"expiration" : {"day":1},
+	"conditions": [ ["starts-with", "$key", "zdjecia/"],
+    				 {"bucket": "piotrtomczyk"}, 
+    				 {"acl": "private"},
+    				 {"success_action_redirect": "http://localhost:8080/success"},   
+    				 ["content-length-range", 0, 1048576]
+    				]   
+}
