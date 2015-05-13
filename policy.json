@@ -2,7 +2,7 @@
 	"conditions": [ ["starts-with", "$key", "zdjecia/"],
     				 {"bucket": "piotrtomczyk"}, 
     				 {"acl": "private"},
-    				 {"success_action_redirect": "http://localhost:8080/success"},   
+    				 {"success_action_redirect": "http://ec2-52-11-5-194.us-west-2.compute.amazonaws.com:8080/success"},   
     				 ["content-length-range", 0, 1048576]
     				]   
 }
