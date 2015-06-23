@@ -1,7 +1,6 @@
 var AWS = require("aws-sdk");
 var helpers = require("./helpers");
-//var Policy = require("../s3post").Policy;
-//var S3Form = require("../s3post").S3Form;
+
 var AWS_CONFIG_FILE = "./config.json";
 var APP_CONFIG_FILE = "./app.json";
 var haderr=false;
@@ -23,9 +22,7 @@ sqs.receiveMessage({
    VisibilityTimeout: 60, // seconds - how long we want a lock on this job
    WaitTimeSeconds: 3 // seconds - how long should we wait for a message?
  }, function(err, data) {
-   // If there are any messages to get
    if (data.Messages) {
-      // Get the first message (should be the only one since we said to only get one above)
       var message = data.Messages[0],
            body = message.Body;
 		   console.log(body);
@@ -38,7 +35,7 @@ sqs.receiveMessage({
 			path = downloadObject(key,function (err,path){
 			if (err) console.log('nima');
 			else {
-			//console.log(path)
+			
 			gm = require('gm');			
 		gm(path)
 		.rotate('green', val)
@@ -78,10 +75,7 @@ sqs.receiveMessage({
 			path = downloadObject(key,function (err,path){
 				if (err) console.log('nima');
 				else {
-					//console.log(path)
-					//var par = val.split(',');
-					//var width = par[0];
-					//var height = par[1];
+					
 					gm = require('gm');			
 					gm(path)
 					.implode(val)
@@ -121,11 +115,7 @@ sqs.receiveMessage({
 		}
 		  
 		   
-      // Now this is where you'd do something with this message
-      //doSomethingCool(body, message);  // whatever you wanna do
-      // Clean up after yourself... delete this message from the queue, so it's not executed again
-        // We'll do this in a second
-	  
+     
    }
    else {
    console.log('oczekuje');
@@ -140,14 +130,12 @@ sqs.receiveMessage({
       QueueUrl: appConfig.QueueUrl,
       ReceiptHandle: message.ReceiptHandle
    }, function(err, data) {
-      // If we errored, tell us that we did
       err && console.log(err);
    });
 };
 var downloadObject = function(key,callback){
 	var s3 = new AWS.S3();
 	var klucz = key;
-	 //console.log(klucz);
 	var opcje = {
 		Bucket: 'piotrtomczyk',
 		Key: klucz
@@ -197,38 +185,6 @@ var sendObject = function(path,key){
 
 
 
-//var params = {
-	//"QueueUrl": appConfig.QueueUrl,
-    //"MaxNumberOfMessages": 1,
-    //"VisibilityTimeout": 30,
-    //"WaitTimeSeconds": 20
-//};
-
-//function readMessage(){
-	//sqs.receiveMessage(params,function(err,data){
-	//	var sqsmsg_body;
-		//if((data.Messages)&&(typeof data.Messages[0] !== 'undefined'&& typeof data.Messages[0].Body !== 'undefined')){
-	//		var message = data.Messages[0];
-	//		sqsmsg_body = message.Body;
-	//		console.log(sqsmsg_body);
-		//	removeFromQueue(message);
-	//	}
-	//	else{
-	//		console.log(chuja);
-	//	}
-		
-	//	});
-		//readMessage();
-	//}
-//var removeFromQueue = function(message) {
-  // sqs.deleteMessage({
-    //  QueueUrl: appConfig.QueueUrl,
-     // ReceiptHandle: message.ReceiptHandle
-   //}, function(err, data) {
-      // If we errored, tell us that we did
-     // err && console.log(err);
-   //});
-//};
 
 
 
